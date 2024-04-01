@@ -1,0 +1,59 @@
+<div class = "home-container">
+    <div class = "item1"></div>
+    <div class = "item2"></div>
+    <div class = "item3"></div>
+    <div class = "item4"></div>
+    <div class = "item5"></div>
+
+    <div class = "item6">
+        <br><br><br><br><br><br><br><br><br><br>
+        <img class="text" style="width: 900px" src="https://iria.edinburgh.domains/FFF-SimpleExample/img/text.png" alt="logo">
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <img class="bug" src="https://iria.edinburgh.domains/FFF-SimpleExample/img/bug_closed.png" alt="logo">
+        <br><br><br>
+        <a href="{{ @BASE }}/main" class="explore-button">Explore</a>
+        <br><br><br><br><br><br><br><br><br>
+    </div>
+
+    <div class = "item7"></div>
+    <div class = "item8"></div>
+    <div class = "item9"></div>
+    <div class = "item10"></div>
+    <div class = "item11"></div>
+    <div class = "item12"></div>
+    <div class = "item13"></div>
+</div>
+
+<script>
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY; // Get the current scrolling position
+        const height = document.body.scrollHeight - window.innerHeight;
+
+        // Calculate hue rotation angle
+        const hueRotateValue = (scrollPosition / (2.5*height)) * 360 -60;
+
+        // Set the filter effect of the background image to achieve color change
+        document.querySelector('.home-container').style.filter = `hue-rotate(${hueRotateValue}deg) saturate(80%) brightness(70%) contrast(180%)` ;
+    });
+
+    window.addEventListener('scroll', function() {
+        var bug = document.querySelector('.bug');
+
+        if (window.scrollY > 0) { // If the user has scrolled down
+            bug.style.animationPlayState = 'running'; // Start the animation
+        } else {
+            bug.style.animationPlayState = 'paused'; // Stop the animation
+        }
+    });
+
+    document.querySelector('.explore-button').addEventListener('mouseover', function() {
+        document.querySelector('.bug').src = 'https://iria.edinburgh.domains/FFF-SimpleExample/img/bug.png'; // Path to open wings image
+    });
+
+    document.querySelector('.explore-button').addEventListener('mouseout', function() {
+        document.querySelector('.bug').src = 'https://iria.edinburgh.domains/FFF-SimpleExample/img/bug_closed.png'; // Path to closed wings image
+    });
+
+    var imgOpenWings = new Image();
+    imgOpenWings.src = 'https://iria.edinburgh.domains/FFF-SimpleExample/img/bug.png'; // Path to open wings image
+</script>

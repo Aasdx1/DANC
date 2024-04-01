@@ -1,0 +1,197 @@
+<?php
+// define variables and set to empty values
+  $username = $email = $password = $confirm_password = "";
+  $nameErr = $emailErr = $passwordErr = $passwordMissing = "";
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // check USERNAME
+    if (empty($_POST["username"])) {
+      $nameErr = "Username is required";
+    } else {
+      $username = test_input($_POST["username"]);
+      if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        $nameErr = "Only letters and white space allowed";
+      }
+    }
+
+  // check EMAIL-ADDRESS
+    if (empty($_POST["email"])) {
+      $emailErr = "Email is required";
+    } else {
+      $email = test_input($_POST["email"]);
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Invalid email format";
+      }
+    }
+
+  // check PASSWORD
+    if (empty($_POST["password"])) {
+      $passwordErr = "Password is required";
+    } else {
+      $password = test_input($_POST["password"]);
+    }
+
+  // check if input the password again to confirm password
+    if (empty($_POST["confirm_password"])) {
+      $passwordMissing = "Password is required";
+    } else {
+      $passwordMissing = test_input($_POST["confirm_password"]);
+    }
+
+    ]);
+}
+
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>
+
+<div class="user-form-page">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{{ @BASE }}/ " class="navbar-logo">
+                <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/logo.png" alt="Logo">
+            </a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="{{ @BASE }}/resource" class="navbar-link">Resource</a></li>
+                <li class="navbar-item"><a href="{{ @BASE }}/main" class="navbar-link">Home</a></li>
+                <li class="navbar-item"><a href="{{ @BASE }}/contact" class="navbar-link">Contact</a></li>
+            </ul>
+            <div class="navbar-login">
+                <a href="{{ @BASE }}/login" class="navbar-link login">Log in</a>
+            </div>
+        </div>
+    </nav>
+    <div class="form">
+        <?php
+        $errorMsg = "";
+        if (isset($_GET['error']) && $_GET['error'] == 'invalid') {
+            $errorMsg = "Invalid username or password.";
+        }?>
+
+        <form id="login-form" name="login" method="post" action="{{ @BASE }}/login">
+            <div class="login-logo">
+                <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/login_logo.png" alt="logo">
+            </div>
+            <br><br>
+            <div class="uname-psw">
+                <input name="username" type="text" placeholder="Enter Username" id="username_login" size="50" required><span class="error">* <?php echo $nameErr;?></span>
+                <div>
+                    <input name="password" type="password" placeholder="Enter Password" id="password_login" size="50" required><span class="error">* <?php echo $passwordErr;?></span>
+                </div>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </div>
+            <div>
+                <p>
+                    <button type="submit" name="Submit" class="login-button">Login</button>
+                </p>
+            </div>
+            <p>
+                <a href="#" id="sign-up" class="signup-link">Sign up here</a>
+<!--                <a href="{{ @BASE }}/signupform" class="forgot-password-link">Forget Password</a>-->
+            </p>
+        </form>
+        <form id="signup-form" name="signup" method="post" action="{{ @BASE }}/signup" onsubmit="return validatePsw()">
+            <div class="login-logo">
+                <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/login_logo.png" alt="logo">
+            </div>
+            <br>
+            <div class="uname-psw" >
+                <input name="username" type="text" placeholder="Enter Username" id="username_signup" size="50" required><span class="error"/>* <?php echo $nameErr;?></span>
+                <input name="email" type="text" placeholder="Enter Email Address" id="email" size="50" required/><span class="error">* <?php echo $emailErr;?></span>
+                <input name="password" type="text" placeholder="Enter Password" id="password_signup" size="50" required/><span class="error">* <?php echo $passwordErr;?></span>
+                <input name="confirm_password" type="text" placeholder="Enter Password" id="confirm_password" size="50" oninput="validatePsw()" required/><span class="error"> * <?php echo $passwordMissing;?></span>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </div>
+            <input type="checkbox" name="remember" required>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.
+            <div>
+                <button id="Cancel" type="button" name="Cancel" class="cancel-signup" style="margin-right: 10px">Cancel</button>
+                <button type="submit" name="Submit" class="signup-button" style="margin-left: 10px">Sign Up</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById("sign-up").addEventListener('click', function (e){
+        e.preventDefault();
+        document.querySelector('.user-form-page').classList.add('new-user');
+    })
+    document.getElementById("Cancel").addEventListener('click', function (e){
+        e.preventDefault();
+        document.querySelector('.user-form-page').classList.remove('new-user');
+    })
+
+    function validateConfirmPassword() {
+        var password = document.getElementById('password_signup').value;
+        var confirmPassword = document.getElementById('confirm_password');
+        var errorSpan = document.getElementById('password_match_error');
+
+        if (password !== confirmPassword.value) {
+            // Passwords do not match, add a red border and show the error message
+            confirmPassword.value = '';
+            confirmPassword.style.borderColor = 'red';
+            errorSpan.textContent = 'Passwords do not match';
+        } else {
+            // Passwords match, remove the red border and error message
+            confirmPassword.style.borderColor = '';
+            errorSpan.textContent = '';
+        }
+    }
+
+    // document.getElementById("signup-form").addEventListener('submit', function (e) {
+    //     e.preventDefault();
+    //
+    //     var formData = new FormData(this);
+    //
+    //     fetch('/api/signup', {
+    //         method: 'POST',
+    //         body: formData
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if(data.status === 'success') {
+    //                 // Handle success - redirect or update the UI accordingly
+    //                 console.log(data.message);
+    //             } else {
+    //                 // Handle failure - show user a message or log the error
+    //                 console.error(data.message);
+    //             }
+    //         })
+    //         .catch(error => {
+    //             // Handle any errors that occurred during the fetch
+    //             console.error('Error:', error);
+    //         });
+    // });
+    // document.getElementById("login-form").addEventListener('submit', function (e) {
+    //     e.preventDefault();
+    //
+    //     var formData = new FormData(this);
+    //
+    //     fetch('/api/login', {
+    //         method: 'POST',
+    //         body: formData,
+    //         redirect: '/home'
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if(data.status === 'success') {
+    //                 // Handle success - redirect or update the UI accordingly
+    //                 console.log(data.message);
+    //                 console.log(responce.url);
+    //             } else {
+    //                 // Handle failure - show user a message or log the error
+    //                 console.error(data.message);
+    //             }
+    //         })
+    //         .catch(error => {
+    //             // Handle any errors that occurred during the fetch
+    //             console.error('Error:', error);
+    //         });
+</script>
+

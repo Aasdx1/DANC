@@ -1,0 +1,38 @@
+
+<div class="resource-container">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{{ @BASE }}/ " class="navbar-logo">
+                <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/logo.png" alt="Logo">
+            </a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="{{ @BASE }}/resource" class="navbar-link">Resource</a></li>
+                <li class="navbar-item"><a href="{{ @BASE }}/main" class="navbar-link">Home</a></li>
+                <li class="navbar-item"><a href="{{ @BASE }}/contact" class="navbar-link">Contact</a></li>
+            </ul>
+            <div class="navbar-login">
+                <a href="{{ @BASE }}/login" class="navbar-link login">Log in</a>
+            </div>
+        </div>
+    </nav>
+    <div class="resource-content">
+        <button onclick="changeBg()" style="background-color: transparent; border: none; width: 100px;height: 100px"></button>
+    </div>
+
+</div>
+<script>
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY; // Get the current scrolling position
+        const height = document.body.scrollHeight - window.innerHeight;
+
+        // Calculate hue rotation angle
+        const hueRotateValue1 = (scrollPosition / (2.5*height)) * 360 -180;
+
+        // Set the filter effect of the background image to achieve color change
+        document.querySelector('.contact-container').style.filter = `hue-rotate(${hueRotateValue1}deg) saturate(80%) brightness(70%) contrast(180%)` ;
+    });
+    function changeBg() {
+        document.querySelector('.resource-container').style.backgroundImage="url('https://iria.edinburgh.domains/FFF-SimpleExample/img/Resource2.png')";
+    }
+
+</script>

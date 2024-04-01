@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="DANC" filePermissions="420" folderPermissions="493" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false" autoUploadExternalChanges="true">
+    <option name="confirmBeforeUploading" value="false" />
+    <serverData>
+      <paths name="DANC">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/AboveWebRoot" local="$PROJECT_DIR$/AboveWebRoot" web="/" />
+            <mapping deploy="/public_html/FFF-SimpleExample" local="$PROJECT_DIR$/FFF-SimpleExample" web="/FFF-SimpleExample" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ON_EXPLICIT_SAVE" />
+  </component>
+</project>

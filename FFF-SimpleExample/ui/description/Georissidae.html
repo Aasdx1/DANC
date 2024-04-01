@@ -1,0 +1,161 @@
+<script>
+    readMore = function() {
+        var dots = document.getElementById("dots");
+        var btnText = document.getElementById("readMoreBtn");
+        var description = document.getElementById("beetleDescription");
+
+        if (btnText.innerHTML === "Read more") {
+            btnText.innerHTML = "Read less";
+            description.style.webkitLineClamp = 'unset';
+        } else {
+            btnText.innerHTML = "Read more";
+            description.style.webkitLineClamp = 5;
+        }
+    }
+</script>
+<div class="beetle-container"  style="background-image: url('https://iria.edinburgh.domains/FFF-SimpleExample/img/beetle/{{@beetleName}}_bg.png');">
+    <nav class="navbar" style="
+    background: url('https://iria.edinburgh.domains/FFF-SimpleExample/img/beetle/{{@beetleName}}_bg.png') no-repeat;
+    background-size:100%">
+        <div class="navbar-container">
+            <a href="{{ @BASE }}/ " class="navbar-logo">
+                <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/logo.png" alt="Logo">
+            </a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="{{ @BASE }}/resource" class="navbar-link">Resource</a></li>
+                <li class="navbar-item"><a href="{{ @BASE }}/main" class="navbar-link">Home</a></li>
+                <li class="navbar-item"><a href="{{ @BASE }}/contact" class="navbar-link">Contact</a></li>
+            </ul>
+            <div class="navbar-login">
+                <a href="{{ @BASE }}/login" class="navbar-link login">Log in</a>
+            </div>
+        </div>
+    </nav>
+    <div id="myModal" class="modal">
+        <div class="insect-name">
+            <h3 style="font-size: 90px;text-align: right; letter-spacing: 6px; width: calc(100% - 60px)">{{@beetleName}}</h3>
+            <p id="beetleDescription" class="beetle-description">
+                {{@beetleInfo.description}}
+            </p>
+            <button onclick="readMore()" id="readMoreBtn">Read more</button>
+        </div>
+        <div class="insect-image">
+            <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/beetle/{{@beetleName}}.png" alt="Insect Image">
+        </div>
+        <div class="modal-section map-and-info">
+            <div class="insect-map">
+                <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/beetle/{{@beetleName}}_map.png" alt="Map Image">
+            </div>
+            <div class="source_btn">
+                <button onclick="window.location.href='{{@beetleInfo.Link}}'" id="linkBtn">Explore</button>
+                <button onclick="window.location.href='{{@beetleInfo.Video}}'" id="videoBtn">Video</button>
+            </div>
+            <div class="insect-introduction">
+                <table>
+                    <tr>
+                        <td>Common name</td>
+                        <td>{{@beetleInfo.common_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Number of species</td>
+                        <td>{{@beetleInfo.number_of_species}}</td>
+                    </tr>
+                    <tr>
+                        <td>Size Range</td>
+                        <td>{{@beetleInfo.size_range}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tarsi</td>
+                        <td>{{@beetleInfo.tarsi}}</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="forum">
+        <div class="add-comment-container" onclick="checkLoginAndShowInput()">
+            <img class="avatar" src="https://iria.edinburgh.domains/FFF-SimpleExample/img/avatar.jpg" alt="avatar">
+            <textarea rows="4" cols="100" class="comment-input" placeholder="Add a comment..."></textarea>
+            <!--            <input type="text" id="commentInput" class="comment-input" placeholder="Add a comment..." />-->
+            <button onclick="addComment()" class="comment-submit-btn">Submit</button>
+        </div>
+        <div class="comments-container">
+            <div class="comment">
+                <img class="avatar" src="https://iria.edinburgh.domains/FFF-SimpleExample/img/avatar.jpg" alt="avatar">
+                <div class="comment-content">
+                    <h4>Emily Watson</h4>
+                    <p>The insects of the Rhynchitidae family are not only uniquely shaped but also play significant roles in nature.</p>
+                    <div class="comment-stats">
+                        <span class="likes">236</span>
+                        <span class="dislikes">32</span>
+                    </div>
+                </div>
+            </div>
+            <div class="comment">
+                <img class="avatar" src="https://iria.edinburgh.domains/FFF-SimpleExample/img/avatar.jpg" alt="avatar">
+                <div class="comment-content">
+                    <h4>Sarah Johnson</h4>
+                    <p>Insects from the Rhynchitidae family are crucial for our understanding of plant-insect interactions in ecosystems.</p>
+                    <div class="comment-stats">
+                        <span class="likes">236</span>
+                        <span class="dislikes">32</span>
+                    </div>
+                </div>
+            </div>
+            <div class="comment">
+                <img class="avatar" src="https://iria.edinburgh.domains/FFF-SimpleExample/img/avatar.jpg" alt="avatar">
+                <div class="comment-content">
+                    <h4>Michael Brown</h4>
+                    <p>They not only engage the students' interest but also effectively guide them to explore the mysteries of entomology and biodiversity.</p>
+                    <div class="comment-stats">
+                        <span class="likes">236</span>
+                        <span class="dislikes">32</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    // Check if the user is logged in and either show input or redirect to login
+    function checkLoginAndShowInput() {
+        // This will be filled in by the server side if the user is logged in
+        var isLoggedIn = '{{@isLoggedIn}}';
+
+        if (isLoggedIn) {
+            // If user is logged in, show input box for adding comment
+            var commentInputHTML = `
+        <textarea id="commentInput" placeholder="Your comment"></textarea>
+        <button onclick="submitComment()">Submit</button>
+      `;
+            document.getElementById('commentBox').innerHTML = commentInputHTML;
+        } else {
+            // If user is not logged in, redirect to the login page
+            window.location.href = '/login'; // Replace with your login page URL
+        }
+    }
+
+    // Submit new comment to the server
+    function submitComment() {
+        var commentText = document.getElementById('commentInput').value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/addComment", true); // Replace with your actual URL for adding comment
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                // On success, prepend the new comment to the comments section
+                var commentsContainer = document.getElementById('commentsContainer');
+                var newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.textContent = commentText; // In a real scenario, you should sanitize this text before displaying
+                commentsContainer.insertBefore(newComment, commentsContainer.firstChild);
+            }
+        }
+        xhr.send("comment=" + encodeURIComponent(commentText));
+    }
+
+
+</script>

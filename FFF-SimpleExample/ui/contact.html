@@ -1,0 +1,83 @@
+<div class="contact-container" >
+    <nav class="navbar" >
+        <div class="navbar-container" style="
+        background: url('https://iria.edinburgh.domains/FFF-SimpleExample/img/beetle/homebg.png') no-repeat;
+        background-size:100%">
+            <a href="{{ @BASE }}/ " class="navbar-logo">
+                <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/logo.png" alt="Logo">
+            </a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="{{ @BASE }}/resource" class="navbar-link">Resource</a></li>
+                <li class="navbar-item"><a href="{{ @BASE }}/main" class="navbar-link">Home</a></li>
+                <li class="navbar-item"><a href="{{ @BASE }}/contact" class="navbar-link">Contact</a></li>
+            </ul>
+            <div class="navbar-login">
+                <a href="{{ @BASE }}/login" class="navbar-link login">Log in</a>
+            </div>
+        </div>
+    </nav>
+    <div class="contact-title">
+        <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/login_logo.png" alt="logo">
+        <p class="title">About Us.</p>
+    </div>
+    <div class="box">
+        <div class="text">
+            <p class="sub-sub-title">Discover</p>
+            <p style="color: #F6DC52; font-size: 20px">What we do?</p>
+            <br><br>
+            <p style="text-align: justify">
+                In Beetle Insight we reveal the intricate and often overlooked world of beetles. Our digital platforms document the rich biodiversity of beetles across the UK.
+            </p>
+        </div>
+        <div class="img" >
+            <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/discover.png" alt="insect-img" style="float: right">
+        </div>
+    </div>
+    <div class="box">
+        <div class="img">
+            <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/learn.png" alt="insect-img">
+        </div>
+        <div class="text" style="text-align: right">
+            <p class="sub-sub-title">Learn</p>
+            <p style="color: #F6DC52; font-size: 20px">What can you get?</p>
+            <br><br>
+            <p style="text-align: justify; ">
+                BEETLE GALLERY:<br>
+                A collection of images showing the vivid details and unique characteristics of each beetle.
+                <br><br>
+                IN-DEPTH INTRODUCTION:<br>
+                A comprehensive introduction to the life cycles, habitats and behaviours of British beetles, giving you an in-depth understanding of their ecological role and importance.
+            </p>
+        </div>
+    </div>
+    <div class="contact-box">
+        <div class="sub-title">
+            <p>Our Team</p>
+        </div>
+        <div class="members">
+            <div class="jiayi">
+                <img class="avatar" src="https://iria.edinburgh.domains/FFF-SimpleExample/img/logo.png" alt="Jiayi Chen">
+                <p class="name"  style="font-family:'Outfit Regular';font-size: 30px;letter-spacing: 2px;">Jiayi Chen</p>
+                <p>Design Informatics</p>
+            </div>
+            <div class="chengying">
+                <img class="avatar" src="https://iria.edinburgh.domains/FFF-SimpleExample/img/logo.png" alt="Jiayi Chen">
+                <p class="name" style="font-family:'Outfit Regular';font-size: 30px;letter-spacing: 2px;">Chengying Liu</p>
+                <p>Design and Digital Media</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY; // Get the current scrolling position
+        const height = document.body.scrollHeight - window.innerHeight;
+
+        // Calculate hue rotation angle
+        const hueRotateValue1 = (scrollPosition / (2.5*height)) * 360 -90;
+
+        // Set the filter effect of the background image to achieve color change
+        document.querySelector('.contact-container').style.filter = `hue-rotate(${hueRotateValue1}deg) saturate(80%) brightness(70%) contrast(180%)` ;
+    });
+</script>

@@ -1,0 +1,105 @@
+<div>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{{ @BASE }}/ " class="navbar-logo">
+                <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/logo.png" alt="Logo">
+            </a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="{{ @BASE }}/resource" class="navbar-link">Resource</a></li>
+                <li class="navbar-item"><a href="{{ @BASE }}/main" class="navbar-link">Home</a></li>
+                <li class="navbar-item"><a href="{{ @BASE }}/contact" class="navbar-link">Contact</a></li>
+            </ul>
+            <div class="navbar-login">
+                <a href="{{ @BASE }}/login" class="navbar-link login">Log in</a>
+            </div>
+        </div>
+    </nav>
+    <div class="carousel-container">
+        <div class="carousel-arrow left-arrow" onclick="moveCarousel('left')">&#10094;</div>
+        <div class="card-container">
+            <repeat group="{{@dbData}}" value="{{@record}}">
+                <div class="card"
+                     style="background-image: url('https://iria.edinburgh.domains/FFF-SimpleExample/img/beetle/{{trim(@record.family_name)}}_bg.png');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;" >
+                    <p class="card-name">{{trim(@record.family_name)}}</p>
+                    <a href="{{ @BASE }}/{{@record.family_name}}">
+<!--                   <a onclick="goToDescription('{{@record.family_name}}')">-->
+                       <img class="bug" src="https://iria.edinburgh.domains/FFF-SimpleExample/img/beetle/{{trim(@record.family_name)}}.png" alt="Image 1">
+                    </a>
+                </div>
+            </repeat>
+        </div>
+        <div class="carousel-arrow right-arrow" onclick="moveCarousel('right')">&#10095;</div>
+    </div>
+
+</div>
+
+<script>
+    function goToDescription(name){
+        const newUrl = '{{ @BASE }}/' + name;
+        window.location.href = newUrl;
+    }
+
+    window.addEventListener('scroll', function() {
+        var bug = document.querySelector('.bug');
+        bug.style.animationPlayState = 'running';
+    });
+
+    let currentIndex = 0;
+    let isMoving = false;
+    const cardContainer = document.querySelector('.card-container');
+    const cards = document.querySelectorAll('.card');
+    const totalCards = cards.length;
+    const cardStyle = window.getComputedStyle(cards[0]);
+    const cardMarginRight = parseFloat(cardStyle.marginRight);
+    const cardWidth = cards[0].offsetWidth + cardMarginRight; // Including margin
+
+    function moveCarousel(direction) {
+        if (isMoving) return;
+        isMoving = true;
+
+        if (direction === 'right') {
+            currentIndex = (currentIndex + 1) % totalCards;
+        } else {
+            currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+        }
+
+        const offset = -(currentIndex * (cardWidth));
+        cardContainer.style.transform = `translateX(${offset}px)`;
+
+        setTimeout(() => {
+            if (direction === 'right' && currentIndex === 0) {
+                cardContainer.style.transition = 'none';
+                cardContainer.appendChild(cardContainer.firstElementChild);
+                cardContainer.style.transform = 'translateX(0)';
+            } else if (direction === 'left' && currentIndex === totalCards - 1) {
+                cardContainer.style.transition = 'none';
+                cardContainer.prepend(cardContainer.lastElementChild);
+                cardContainer.style.transform = 'translateX(-100%)';
+            }
+
+
+            setTimeout(() => {
+                cardContainer.style.transition = 'transform 0.5s ease';
+                isMoving = false;
+            }, 500);
+
+            // Wrap around effect
+            if (currentIndex % (totalCards / cardsPerView) === 0) {
+                cardContainer.appendChild(cardContainer.firstElementChild);
+                cardContainer.style.transition = 'none';
+                cardContainer.style.transform = 'translateX(0)';
+                setTimeout(() => {
+                    cardContainer.style.transition = 'transform 0.5s ease';
+                });
+            }
+        });
+
+        document.querySelector('.left-arrow').addEventListener('click', () => moveCarousel('left'));
+        document.querySelector('.right-arrow').addEventListener('click', () => moveCarousel('right'));
+
+
+    }
+</script>

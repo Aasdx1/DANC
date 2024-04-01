@@ -1,0 +1,724 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+/*========Font Family==============================*/
+@font-face {
+    font-family: 'Amatica SC Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Amatica SC Regular'), url('https://iria.edinburgh.domains/FFF-SimpleExample/font/AmaticaSC-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'Amatica SC Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Amatica SC Bold'), url('https://iria.edinburgh.domains/FFF-SimpleExample/font/AmaticaSC-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'Outfit ExtraLight';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Outfit ExtraLight'), url('https://iria.edinburgh.domains/FFF-SimpleExample/font/OutfitExtraLight.woff') format('woff');
+}
+@font-face {
+    font-family: 'Outfit Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Outfit Regular'), url('https://iria.edinburgh.domains/FFF-SimpleExample/font/OutfitRegular.woff') format('woff');
+}
+@font-face {
+    font-family: 'Outfit Thin';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Outfit Thin'), url('https://iria.edinburgh.domains/FFF-SimpleExample/font/OutfitVariableFont_wght1.woff') format('woff');
+}
+
+/*========Navigation Bar==============================*/
+.navbar {
+    background-color: transparent;
+    color: white;
+    overflow: hidden;
+    font-family: "Outfit ExtraLight";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.navbar-logo img {
+    height: 50px; /* Adjust as needed */
+}
+.navbar-menu {
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+.navbar-item {
+    padding: 0 15px;
+}
+.navbar-link {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 20px;
+}
+.navbar-link:hover {
+    color: #666666;
+}
+.navbar-login {
+    padding: 0 15px;
+}
+.login {
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+.login:hover {
+    color: #666666;
+}
+
+/*========Home Page====================================*/
+.explore-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 2px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    font-size: 38px;
+    font-family: "Amatica SC Bold";
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.explore-button:hover {
+    background-color: #45a049;
+}
+.home-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    transition: filter 0.1s ease;
+    width: 100%;
+    min-height: 100vh;
+    overflow: auto;
+    filter: hue-rotate(-60deg) saturate(80%) brightness(70%) contrast(180%);
+    background-image: url('https://iria.edinburgh.domains/FFF-SimpleExample/img/homebg.png');
+    background-size: 100% auto;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+.grid-container > div {
+    font-size: 30px;
+    text-align: center;
+    padding: 80px;
+}
+.item6 {
+    grid-area: 2 / 2 / 4 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.bug {
+    height: 500px;
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+}
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px); /* Adjust the pixel value for the amount of movement */
+    }
+}
+
+/*========Preview Page=========================================*/
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    filter: brightness(70%) contrast(140%);
+}
+.card-container {
+    display: flex;
+    /*width: calc(25% * 12); !* Adjust width according to the number of cards *!*/
+    transition: transform 0.5s ease;
+}
+.card {
+    flex: 0 0 25%;
+    /*width: 25%; !* Each card takes up 25% of the container's width *!*/
+    padding: 0px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-name {
+    font-family: "Outfit ExtraLight";
+    letter-spacing: 5px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 35px;
+    left: 3px;
+    opacity: 0;
+    flex-basis: 40%;
+    transition: opacity 0.3s;
+    top: 50%;
+    color: white;
+    margin-left: 0px;
+}
+.card:hover .card-name {
+    opacity: 0.5;
+}
+.card a {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: -50%;
+    height: 80%;
+    object-fit: contain;
+    flex-basis: 60%;
+    transition: transform 0.5s ease;
+}
+.card img {
+    max-width: 140%;
+    filter: brightness(160%) contrast(75%);
+    height: auto;
+    /*max-height: 130%;*/
+    position: relative;
+    object-fit: cover;
+    right: -50%;
+}
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 100;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0.6;
+}
+.left-arrow {
+    left: 10px;
+    transform: translateY(-50%);
+}
+.right-arrow {
+    right: 10px;
+    transform: translateY(-50%);
+}
+.carousel-arrow:hover {
+    opacity: 1;
+}
+
+/*========Beetle Page=========================================*/
+.beetle-container {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    filter: brightness(70%) contrast(140%);
+    display: flex;
+    flex-direction: column;
+    background-size: 100% auto;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+}
+.modal {
+    display: flex; /* Hidden by default. Change to 'block' to see the modal */
+    width: 100vw;
+    margin-top: 5vh;
+    height: 92vh;
+    justify-content: center;
+    flex-direction: row;
+    color: white;
+    overflow: hidden;
+}
+.modal-body {
+    padding: 0;
+    color: white;
+}
+.insect-name {
+    max-width: 35%;
+    padding-left: 30px;
+    /*display: flex;*/
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 35%;
+    font-family: "Outfit ExtraLight";
+}
+.insect-name h3{
+    /*position: relative;*/
+
+}
+.beetle-description {
+    font-family: 'Outfit ExtraLight';
+    font-size: 18px;
+    text-align: justify;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    margin-bottom: 20px;
+    padding: 40px;
+}
+#readMoreBtn {
+    font-family: 'Outfit Regular';
+    padding: 40px;
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    color: #333333;
+    right: 10%;
+    text-align: right;
+    text-decoration: none;
+    font-size: 15px;
+    font-style: italic;
+    text-transform: uppercase;
+    /*margin: 4px 2px;*/
+    cursor: pointer;
+}
+.insect-image {
+    position: relative;
+    text-align: center;
+    flex-basis: 30%;
+    display: flex;
+    align-items: center;
+}
+.insect-image img {
+    max-width: 130%; /* Larger than its container to overflow */
+    height: auto;
+    filter: brightness(160%) contrast(75%);
+    z-index: 10;
+    position: absolute; /* Position the image absolutely within its parent */
+    left: 50%; /* Move the image to the right, centering it on the container */
+    transform: translateX(-50%); /* Pull the image back to the left, centering it */
+}
+.map-and-info {
+    padding-left: 20px;
+    align-items: center;
+    flex-basis: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.source_btn {
+    display: flex;
+    font-size: 16px;
+    float: left;
+    margin: 0px;
+    flex-direction: column;
+}
+.source_btn button {
+    border: 1px solid white;
+    color: white;
+    padding: 7px 20px;
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+.insect-map img {
+    width: calc(100% - 40px);
+    height: auto;
+    position: relative;
+}
+.insect-introduction {
+    font-family: "Outfit ExtraLight";
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    max-width: 80%;
+    /*max-width: 110%;*/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.insect-introduction td {
+    border-bottom: 1px solid white;
+    padding: 8px;
+}
+.insect-introduction table td {
+    padding: 8px;
+    vertical-align: middle;
+}
+.insect-introduction table td:nth-child(1) {
+    text-align: left;
+    font-weight: bold;
+}
+.insect-introduction table td:nth-child(2) {
+    text-align: right;
+}
+.forum {
+    width: 80%;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.add-comment-container{
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+.comment-input {
+    margin: 10px 20px;
+    padding: 20px;
+    word-break: break-word;
+    border-radius: 15px;
+    font-family: "Outfit ExtraLight";
+    background: rgba(255, 255, 255, 60%) ;
+}
+.comment-submit-btn {
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+    padding: 10px 20px;
+    display: none;
+}
+.avatar {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+    border: 1px solid white;
+}
+.comments-container {
+    /*margin-top: 20px;*/
+    width: 60%;
+    padding: 20px;
+}
+
+.comment {
+    background-color: rgba(255, 255, 255, 60%);
+    margin: 10px 0px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Space between comments */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional shadow for depth */
+}
+
+.comment-avatar {
+    padding-right: 15px;
+}
+
+.comment-avatar img {
+    border-radius: 50%; /* Circular avatar */
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+}
+
+.comment-content {
+    flex-grow: 1;
+    padding-left: 15px;
+}
+
+.comment-content h4 {
+    margin: 0;
+    color: #333; /* Dark text color for the name */
+}
+
+.comment-content p {
+    margin: 5px 0;
+    color: #666; /* Lighter text color for comment */
+}
+
+.comment-stats {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em; /* Smaller text for stats */
+}
+
+.comment-stats span {
+    margin-right: 10px;
+}
+
+.comment-stats .likes:before {
+    content: "\2665"; /* Unicode for heart symbol */
+    color: #FF0000; /* Red heart */
+    margin-right: 5px;
+}
+
+.comment-stats .dislikes:before {
+    content: "\1F44E"; /* Unicode for thumbs down symbol */
+    margin-right: 5px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/*========User Form Page================================*/
+.user-form-page #signup-form {
+    display: none;
+}
+.new-user #signup-form{
+    display: block;
+}
+.user-form-page #login-form {
+    display: block;
+}
+.new-user #login-form {
+    display: none;
+}
+.user-form-page {
+    min-height: 100vh;
+    filter: hue-rotate(-60deg) saturate(80%) brightness(70%) contrast(180%);
+    background-image: url('https://iria.edinburgh.domains/FFF-SimpleExample/img/homebg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.user-form-page .form {
+    margin-top: 5%;
+    filter: hue-rotate(+70deg);
+    background: rgba(140, 217, 113, 70%);
+    padding: 60px;
+    width: 26%;
+    border-radius: 30px;
+    /*background: rgba(105, 208, 158, 70%);*/
+    font-family: "Outfit ExtraLight";
+    color: white;
+    text-align: center;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 50px #668F6F;
+}
+input[type=text], input[type=password] {
+    background-color: rgba(255, 255, 255, 70%);
+    border: 1px solid #9FC5AC;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 30px;
+    padding: 20px;
+    width: calc(100% - 40px);
+    letter-spacing: 1px;
+}
+.form button {
+    background-color: #77B661;
+    border: none;
+    border-radius: 16px;
+    color: white;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+}
+.form .cancel-signup {
+    background-color: #BA7672;
+}
+.form .cancel-signup:hover {
+    background-color: #AA5744;
+}
+.form button:hover {
+    background-color: #61944F;
+}
+.error {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+    display: block; /* To ensure it takes its own line */
+}
+
+
+/*========Contact Page=====================================*/
+.contact-container {
+    transition: filter 0.1s ease;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    filter: hue-rotate(-90deg) saturate(80%) brightness(70%) contrast(180%);
+    background-image: url('https://iria.edinburgh.domains/FFF-SimpleExample/img/homebg.png');
+    background-size: 100% auto;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: "Outfit ExtraLight";
+}
+.contact-title {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    color: white;
+    text-align: center;
+    width: 100vw;
+}
+.contact-title img {
+    transition: transform 1s ease; /* Smooth transition for the flip effect */
+}
+
+.contact-title img:hover {
+    transform: scaleX(-1); /* Flip the image horizontally on hover */
+}
+
+.title {
+    font-family: "Outfit Regular";
+    font-size: 90px;
+    margin-top: 10px;
+}
+.sub-title {
+    font-family: "Outfit Regular";
+    font-size: 60px;
+    color: white;
+    margin-bottom: 20px;
+}
+.box {
+    display: flex;
+    width: 70%;
+    height: 35vh;
+    margin: 20px;
+}
+.text {
+    width: 50%;
+    padding: 30px;
+    letter-spacing: 1px;
+    line-height: 20px;
+}
+.box img {
+    width: 60%;
+    /*height: 20%;*/
+    padding: 30px;
+}
+.sub-sub-title {
+    font-family: "Outfit Regular";
+    font-size: 40px;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.contact-box {
+    display: flex;
+    width: 70%;
+    height: auto;
+    margin: 20px;
+    flex-direction: column;
+}
+.contact-box .members {
+    justify-content: space-between;
+    display: flex;
+    padding: 30px;
+    margin: 0 20%;
+    flex-direction: row;
+    text-align: center;
+}
+
+/*========Resource Page=====================================*/
+.resource-container {
+    transition: filter 0.1s ease;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    /*filter: hue-rotate(-80deg) saturate(80%) brightness(70%) contrast(180%);*/
+    background-image: url('https://iria.edinburgh.domains/FFF-SimpleExample/img/Resource.png');
+    background-size: 100% auto;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: "Outfit ExtraLight";
+}
+
+.page-title{
+    padding-left: 90px;
+    margin: auto;
+    padding-bottom: 0px;
+}
+.resourceTitle{
+    font-family: "Times New Roman";
+    font-size: 85px;
+    font-style: italic;
+    color: #00FF29;
+}
+.main-content{
+    width: 100%;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.resourceSubTitle{
+    font-family: "Times New Roman";
+    font-size: 60px;
+    color: white;
+}
+.column-left{
+    flex: 1;
+}
+.column-right{
+    flex: 1;
+    padding-right: 20px;
+}
+section{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 20px;
+    margin: auto;
+}
+.column-left p {
+    font-family: "Times New Roman";
+    font-size: 22px;
+    color: white;
+    width: 70%;
+    display: block;
+    text-align: justify;
+}
+.column-left img{
+    width: 100%; /* or any other size */
+    height: auto;
+    max-width: 600px; /* or the width of your placeholder image */
+    border: 1px solid #ccc; /* Optional border for the placeholder image */
+}
+.column-right p {
+    font-family: "Times New Roman";
+    font-size: 22px;
+    color: white;
+    width: 70%;
+    display: block;
+    text-align: justify;
+}
+.column-right img{
+    width: 100%; /* or any other size */
+    height: auto;
+    max-width: 600px; /* or the width of your placeholder image */
+    border: 1px solid #ccc; /* Optional border for the placeholder image */
+}

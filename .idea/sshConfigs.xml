@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="iria.edinburgh.domains" id="122bb9a7-6119-4aa2-8fb0-48efe9fa5f58" port="22" nameFormat="DESCRIPTIVE" username="iriaedin" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

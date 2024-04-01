@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="56958dea-86a0-400d-a456-b89a2097a363" name="DANC" url="https://iria.edinburgh.domains">
+        <fileTransfer rootFolder="/home/iriaedin" accessType="SFTP" host="iria.edinburgh.domains" port="22" sshConfigId="122bb9a7-6119-4aa2-8fb0-48efe9fa5f58" sshConfig="iriaedin@iria.edinburgh.domains:22 password">
+          <advancedOptions>
+            <advancedOptions controlEncoding="UTF-8" dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
