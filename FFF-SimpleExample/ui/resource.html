@@ -16,9 +16,55 @@
         </div>
     </nav>
     <div class="resource-content">
-        <button onclick="changeBg()" style="background-color: transparent; border: none; width: 100px;height: 100px"></button>
-    </div>
+        <div class="title-container">
+            <p style="font-size: 80px; font-family: 'Amatica SC Bold'"> BOOKS </p>
+            <p style="width: 90%">For further books and online resources for beetle identification see the <a href="https://www.fscbiodiversity.uk/idsignpost?combine=&field_major_taxon_group_value%5B0%5D=insects%20-%20beetles&field_free__value=All&field_available_as_value=All">ID signpost website</a>, from the Tomorrow's Biodiversity project at Field Studies Council.</p>
 
+        </div>
+        <div class="book-container">
+            <div class="book-list">
+                <div class="book active" onclick="showBookInfo('book1')">
+                    <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/book1.png" alt="book1">
+                </div>
+                <div class="book" onclick="showBookInfo('book2')">
+                    <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/book2.png" alt="book2">
+                </div>
+                <div class="book" onclick="showBookInfo('book3')">
+                    <img src="https://iria.edinburgh.domains/FFF-SimpleExample/img/book3.png" alt="book3">
+                </div>
+            </div>
+
+            <div class="book-intro">
+                <div id="book1" class="book-info active">
+                    <h1 style="letter-spacing: 2px">A key to the families of British Beetles<br></h1>
+                    <h3 style="letter-spacing: 1px">
+                    Author: Unwin, D.M.<br>
+                    Published by: Filed Studies Council<br>
+                    ISBN: 9781851531660
+                    </h3>
+                    <p>This AIDGAP identification key will help non-specialists to identify all families of British beetles - of which there are nearly 100 in total. Over 4000 different species of beetles occur in Britain. Their huge diversity in form, behaviour and ecology make them a daunting group for those attempting beetle identification for the first time.</p>
+                </div>
+                <div id="book2" class="book-info">
+                    <h1 style="letter-spacing: 2px">Beetles of Britain and Ireland<br></h1>
+                    <h3 style="letter-spacing: 1px">
+                        Author: Duff, A.G.<br>
+                        Published by: A.G. Duff Publishing<br>
+                        ISBN: 9780957334731
+                    </h3>
+                    <p>This book covers the phytophagous (plant-feeding) beetles in the superfamilies Chrysomeloidea and Curculionoidea, including the familiar and popular longhorn beetles, seed and leaf beetles, weevils and bark beetles. Chapters on the seed and leaf beetles, and their allies, are provided by the expert guest author Michael Cox.</p>
+                </div>
+                <div id="book3" class="book-info">
+                    <h1 style="letter-spacing: 2px">Checklist of Beetles of the British Isles<br></h1>
+                    <h3 style="letter-spacing: 1px">
+                    Author: Duff, A.G.(Ed.)<br>
+                    Published by: Pemberley Books 2012<br>
+                    ISBN:9780957335707
+                    </h3>
+                    <p>2nd revised edition. Comprehensive checklist of Beetles recorded from Great Britain and Ireland, including the Isle of Man, but not the Channel Islands.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     window.addEventListener('scroll', function() {
@@ -31,8 +77,19 @@
         // Set the filter effect of the background image to achieve color change
         document.querySelector('.contact-container').style.filter = `hue-rotate(${hueRotateValue1}deg) saturate(80%) brightness(70%) contrast(180%)` ;
     });
-    function changeBg() {
-        document.querySelector('.resource-container').style.backgroundImage="url('https://iria.edinburgh.domains/FFF-SimpleExample/img/Resource2.png')";
+
+    function showBookInfo(bookId) {
+        // Remove 'active' class from all books
+        document.querySelectorAll('.book-info').forEach(function(book) {
+            book.classList.remove('active');
+        });
+        document.querySelectorAll('.book').forEach(function(book) {
+            book.classList.remove('active');
+        });
+
+        // Add 'active' class to the clicked book
+        document.getElementById(bookId).classList.add('active');
+        document.querySelector(`[onclick="showBookInfo('${bookId}')"]`).classList.add('active');
     }
 
 </script>

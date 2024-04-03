@@ -50,56 +50,64 @@
     let currentIndex = 0;
     let isMoving = false;
     const cardContainer = document.querySelector('.card-container');
-    const cards = document.querySelectorAll('.card');
+    let cards = document.querySelectorAll('.card');
     const totalCards = cards.length;
     const cardStyle = window.getComputedStyle(cards[0]);
     const cardMarginRight = parseFloat(cardStyle.marginRight);
     const cardWidth = cards[0].offsetWidth + cardMarginRight; // Including margin
+
+    function cloneCardsForLoop() {
+        for (let i = 0; i < totalCards; i++) {
+            let clone = cards[i].cloneNode(true);
+            cardContainer.appendChild(clone);
+        }
+    }
+
+    function setupCarouselInitialState() {
+        cloneCardsForLoop();
+        // Adjust the initial position of the carousel
+        cardContainer.style.transition = 'none';
+        cardContainer.style.transform = `translateX(${-(cardWidth)}px)`;
+        // Add a slight delay before re-enabling transitions to avoid flicker
+        setTimeout(() => {
+            cardContainer.style.transition = '';
+        }, 50);
+    }
+    setupCarouselInitialState();
 
     function moveCarousel(direction) {
         if (isMoving) return;
         isMoving = true;
 
         if (direction === 'right') {
-            currentIndex = (currentIndex + 1) % totalCards;
+            currentIndex++;
         } else {
-            currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+            currentIndex--;
         }
 
-        const offset = -(currentIndex * (cardWidth));
-        cardContainer.style.transform = `translateX(${offset}px)`;
+        cardContainer.style.transition = 'transform 0.5s ease';
+        cardContainer.style.transform = `translateX(${-(currentIndex + 1) * cardWidth}px)`;
 
         setTimeout(() => {
-            if (direction === 'right' && currentIndex === 0) {
+            // Loop back without transition if at the end or beginning
+            if (currentIndex >= totalCards) {
                 cardContainer.style.transition = 'none';
-                cardContainer.appendChild(cardContainer.firstElementChild);
-                cardContainer.style.transform = 'translateX(0)';
-            } else if (direction === 'left' && currentIndex === totalCards - 1) {
+                currentIndex = 0;
+                cardContainer.style.transform = `translateX(${-(cardWidth)}px)`;
+            } else if (currentIndex < 0) {
                 cardContainer.style.transition = 'none';
-                cardContainer.prepend(cardContainer.lastElementChild);
-                cardContainer.style.transform = 'translateX(-100%)';
+                currentIndex = totalCards - 1;
+                cardContainer.style.transform = `translateX(${-(totalCards * cardWidth)}px)`;
             }
-
-
             setTimeout(() => {
                 cardContainer.style.transition = 'transform 0.5s ease';
                 isMoving = false;
-            }, 500);
-
-            // Wrap around effect
-            if (currentIndex % (totalCards / cardsPerView) === 0) {
-                cardContainer.appendChild(cardContainer.firstElementChild);
-                cardContainer.style.transition = 'none';
-                cardContainer.style.transform = 'translateX(0)';
-                setTimeout(() => {
-                    cardContainer.style.transition = 'transform 0.5s ease';
-                });
-            }
-        });
-
-        document.querySelector('.left-arrow').addEventListener('click', () => moveCarousel('left'));
-        document.querySelector('.right-arrow').addEventListener('click', () => moveCarousel('right'));
-
-
+            }, 50); // Add a slight delay before re-enabling transitions to avoid flicker
+        }, 500);
     }
+
+
+    document.querySelector('.left-arrow').addEventListener('click', () => moveCarousel('left'));
+    document.querySelector('.right-arrow').addEventListener('click', () => moveCarousel('right'));
+
 </script>

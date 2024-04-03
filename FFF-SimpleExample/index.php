@@ -54,11 +54,11 @@ $f3->route('GET /@beetleName',
         $f3->set('beetleInfo', $beetleInfo);
 
         // Get comment information
-        $controller1 = new SimpleController('comment');
+        $controller1 = new SimpleController('forum');
         $comment = $controller1->getCommentData($beetle_name);
         $f3->set('comment', $comment);
 
-        $f3->set('content','/description/'.$beetle_name.'html');
+        $f3->set('content','/description/'.$beetle_name.'.html');
         echo template::instance()->render('layout.html');
     }
 );

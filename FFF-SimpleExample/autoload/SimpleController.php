@@ -39,6 +39,15 @@ class SimpleController {
         return $list;
     }
 
+    public function getCommentData($name)
+    {
+        $list = $this->mapper->load(["beetle_name LIKE ?", "%" . $name . "%"]);
+//        if($list == false) {
+//            throw new Exception('Database query failed.');
+//        }
+        return $list;
+    }
+
     public function getAllUserData($name)
     {
         $list = $this->mapper->load(["username LIKE ?", "%" . $name . "%"]);
